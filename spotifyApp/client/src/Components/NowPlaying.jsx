@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardTitle,
-  CardImg,
-  CardBody,
-  CardHeader,
-  Button,
-  CardText,
-  CardSubtitle
-} from "reactstrap";
+// import {
+//   Card,
+//   CardTitle,
+//   CardImg,
+//   CardBody,
+//   CardHeader,
+//   Button,
+//   CardText,
+//   CardSubtitle
+// } from "reactstrap";
 import PropTypes from "prop-types";
 import Spotify from "spotify-web-api-js";
+const spotifyWebApi = new Spotify();
 
 const NowPlaying = props => {
-  const spotifyWebApi = new Spotify();
   const [nowPlaying, setNowPlaying] = useState({});
   const [loading, setLoading] = useState(false);
 
