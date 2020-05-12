@@ -1,10 +1,10 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import Spotify from "spotify-web-api-js";
-
 import Header from "./Components/Header";
-import Box from "./Components/Box";
 import NowPlaying from "./Components/NowPlaying";
+
+import Spotify from "spotify-web-api-js";
+import useFetch from "./DataUtils";
 
 const spotifyWebApi = new Spotify();
 
@@ -23,13 +23,16 @@ function App() {
     return hashParams;
   };
   const params = getHashParams();
+  /* Checking if user is logged in using API */
   useEffect(() => {
     if (params.access_token) {
       /* library stores access token */
       spotifyWebApi.setAccessToken(params.access_token);
       setLoggedIn(true);
     }
-  }, [loggedIn]);
+  }, []);
+  const data = useFetch.fetchData;
+  console.log(data);
 
   return (
     <div className="App">
