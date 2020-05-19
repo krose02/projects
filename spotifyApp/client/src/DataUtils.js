@@ -3,33 +3,73 @@
  * functions that will be used in App.js
  */
 import { useState, useEffect } from "react";
-const url = "https://api.spotify.com/v1/users/coolkid_casey/playlists";
+import Spotify from "spotify-web-api-js";
+const spotifyWebApi = new Spotify();
+const user_ids = [
+  "coolkid_casey",
+  "carolinegarrido",
+  "127323676",
+  "dx9apszk636qozmp7g25m6uog",
+  "iloveeemusic",
+  "nickifrankel"
+];
 
-/* Fetching data from my friend's playlists */
-const useFetch = (/*url*/) => {
-  // const [data, setData] = useState(null);
+var urls = [];
 
-  // async function fetchData() {
-  //   console.log("hi");
-  //   const response = await fetch(
-  //     "https://api.spotify.com/v1/users/coolkid_casey/playlists"
-  //   );
-  //   const json = await response.json();
-  //   setData(json);
-  //   console.log(json);
-  // }
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, ["https://api.spotify.com/v1/users/coolkid_casey/playlists"]);
-  // return data;
-  async function fetchData() {
-    console.log("hi");
-    const response = await fetch(
-      "https://api.spotify.com/v1/users/coolkid_casey/playlists"
-    );
-    const json = await response.json();
-    return json;
+/* hash function that will return the access_token and refresh_token */
+const getHashParams = () => {
+  var hashParams = {};
+  var e,
+    r = /([^&;=]+)=?([^&;]*)/g,
+    q = window.location.hash.substring(1);
+  while ((e = r.exec(q))) {
+    hashParams[e[1]] = decodeURIComponent(e[2]);
+  }
+  return hashParams;
 };
+const params = getHashParams();
 
-export default { useFetch };
+/* Checking to see if user is logged in */
+function CheckLogIn() {
+  /* Setting intitial log in state of user to false */
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    if (params.access_token) {
+      /* library stores access token */
+      spotifyWebApi.setAccessToken(params.access_token);
+      setLoggedIn(true);
+    }
+  }, [params.access_token, loggedIn]);
+  return loggedIn;
+}
+
+/* populating urls based on user_ids */
+for (var i = 0; i < user_ids.length; i++) {
+  urls.push(`https://api.spotify.com/v1/users/${user_ids[i]}/playlists`);
+}
+
+/* fetching playlists from users */
+function GetPlaylists() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function fetchData(url) {
+      await fetch(url, {
+        method: "GET",
+        headers: { Authorization: "Bearer " + params.access_token }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(playlists => {
+          data.push(playlists.items);
+          setData(data);
+        });
+    }
+    urls.forEach(url => {
+      fetchData(url);
+    });
+  });
+  return data;
+}
+
+export { urls, params, CheckLogIn, GetPlaylists };
