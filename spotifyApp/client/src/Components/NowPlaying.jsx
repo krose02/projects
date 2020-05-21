@@ -34,7 +34,11 @@ const NowPlaying = props => {
         {loading && <div> {nowPlaying.song} </div>}
         {loading && (
           <div>
-            <img src={nowPlaying.src} style={{ width: 100 }} />
+            <img
+              src={nowPlaying.src}
+              style={{ width: 100 }}
+              alt="Song that's currently playing"
+            />
           </div>
         )}
       </div>
