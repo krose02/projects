@@ -39,37 +39,13 @@ function CheckLogIn() {
       spotifyWebApi.setAccessToken(params.access_token);
       setLoggedIn(true);
     }
-  }, [params.access_token, loggedIn]);
+  }, [loggedIn]);
   return loggedIn;
 }
 
 /* populating urls based on user_ids */
 for (var i = 0; i < user_ids.length; i++) {
   urls.push(`https://api.spotify.com/v1/users/${user_ids[i]}/playlists`);
-}
-
-/* fetching playlists from users */
-function GetPlaylists() {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    async function fetchData(url) {
-      await fetch(url, {
-        method: "GET",
-        headers: { Authorization: "Bearer " + params.access_token }
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(playlists => {
-          data.push(playlists.items);
-          setData(data);
-        });
-    }
-    urls.forEach(url => {
-      fetchData(url);
-    });
-  });
-  return data;
 }
 
 export { urls, params, CheckLogIn, GetPlaylists };
