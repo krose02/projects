@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+/* Box Styles*/
+.Box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,6 +42,7 @@
     transform: rotate(360deg);
   }
 }
-div, button {
+div,
+button {
   margin: 15px;
 }
