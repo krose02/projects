@@ -1,38 +1,34 @@
 import React from "react";
-import {
-  Card,
-  CardTitle,
-  CardImg,
-  CardBody,
-  Button,
-  CardText,
-  CardSubtitle
-} from "reactstrap";
+import PropTypes from "prop-types";
+import { Card, Button } from "react-bootstrap";
 
 const Box = props => {
   return (
     <div>
-      <Card>
-        <CardImg
-          top
-          width="100%"
-          src="/assets/318x180.svg"
-          alt="Card image cap"
-        />
-        <CardBody>
-          <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
-          <CardText>
+      <Card {...props.cardprops}>
+        <Card.Img width="100%" src="" alt="Card image cap" />
+        <Card.Body>
+          <Card.Title>{props.user_name}</Card.Title>
+          <Card.Text>
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
-          </CardText>
+          </Card.Text>
           <Button>Button</Button>
-        </CardBody>
+        </Card.Body>
       </Card>
     </div>
   );
 };
 
-Box.propTypes = {};
-Box.defaultProps = {};
+Box.propTypes = {
+  user_name: PropTypes.string.isRequired,
+  cardprops: PropTypes.shape({
+    bg: PropTypes.string,
+    border: PropTypes.string
+  })
+};
+Box.defaultProps = {
+  user_name: null,
+  cardprops: {}
+};
 export default Box;
