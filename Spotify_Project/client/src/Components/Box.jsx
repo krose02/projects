@@ -1,19 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, ListGroup } from "react-bootstrap";
 
 const Box = props => {
   return (
     <div>
       <Card {...props.cardprops}>
-        <Card.Img width="100%" src="" alt="Card image cap" />
+        <Card.Header>{props.user_name}</Card.Header>
+        {/* <Card.Img width="100%" src="" alt="Card image cap" /> */}
+        {/* <Card.Body> */}
+        <ListGroup variant="flush">
+          <ListGroup.Item>Hi</ListGroup.Item>
+          <ListGroup.Item>Hi</ListGroup.Item>
+          <ListGroup.Item>Hi</ListGroup.Item>
+        </ListGroup>
         <Card.Body>
-          <Card.Title>{props.user_name}</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Button>Button</Button>
+          <Button type="link" variant="info">
+            See More
+          </Button>
         </Card.Body>
       </Card>
     </div>

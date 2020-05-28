@@ -56,7 +56,7 @@ function getUserNames(user_ids) {
         return response.json();
       })
       .then(user => {
-        user_names.push(user.display_name);
+        user_names.push(user.display_name.toLowerCase());
       });
   });
   return user_names;
@@ -86,4 +86,4 @@ function getUserNames(user_ids) {
 //   return data;
 // }
 
-export { getHashParams, spotifyWebApi, user_names };
+export { user_ids, getHashParams, spotifyWebApi, user_names };

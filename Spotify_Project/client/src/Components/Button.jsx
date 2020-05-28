@@ -8,7 +8,9 @@ const Button = props => {
   const friends = user_names;
   const cardProps = {
     bg: "light",
-    border: "secondary"
+    border: "info",
+    style: { width: "18rem" },
+    text: "dark"
   };
 
   return (
