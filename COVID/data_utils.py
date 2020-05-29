@@ -43,12 +43,6 @@ def get_worldwide_new_deaths(worldwide_data):
     return new_cases
 
 
-def main():
-    daily_reports_path = "./data/jhu-data/csse_covid_19_data/csse_covid_19_daily_reports_us"
-    worldwide_data_path = "./data/owid-data/public/data/ecdc/full_data.csv"
-    daily_reports_data = parse_files_in_path(daily_reports_path)
-    worldwide_data = get_worlwide_data(worldwide_data_path)
-    print(worldwide_data)
 
 
 if __name__ == "__main__":
