@@ -2,6 +2,9 @@ import sys
 import csv
 from os import listdir
 from os.path import isfile, join
+import plotly.graph_objects as go
+import numpy as np
+np.random.seed(1)
 
 # virus data
 NEW_CASES = NEW_DEATHS = TOTAL_CASES = TOTAL_DEATHS = {}
@@ -74,3 +77,25 @@ usa_data = getUsaData(worldwide_data)
 
 # populating usa virus data
 populate_virus_data(usa_data)
+
+# plotting data
+x = [key for key in usa_data]
+# new cases
+y = [NEW_CASES[key] for key in NEW_CASES]
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=x, y=y,
+                         mode='lines+markers',
+                         name='lines+markers'))
+fig.show()
+
+
+def main():
+    usa_data = getUsaData(worldwide_data)
+    x = [key for key in usa_data]
+    y = [NEW_CASES[key] for key in NEW_CASES]
+    for i in range(len(y)):
+        print(y[i])
+
+
+if __name__ == "__main__":
+    main()
