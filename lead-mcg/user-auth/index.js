@@ -15,6 +15,8 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log('connected to db!')
 );
+var db = mongoose.connection;
+db.createCollection('log', { capped: true, size: 5242880, max: 5000 });
 
 // Middleware
 app.use(express.json());
